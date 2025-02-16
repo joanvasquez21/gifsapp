@@ -14,6 +14,7 @@ export default  class GifHistoryComponent {
     inject(ActivatedRoute).params.pipe(
       map((params) => params['query'])
     )
-  )
+  );
+  
 
 }
