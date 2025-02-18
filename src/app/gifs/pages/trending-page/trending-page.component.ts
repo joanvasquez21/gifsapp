@@ -11,7 +11,7 @@ import { GifService } from '../../services/gifs.service';
 })
 export default class TrendingPageComponent {
   
-  gifsService = inject(GifService);
+  gifService = inject(GifService);
   
 
  }
