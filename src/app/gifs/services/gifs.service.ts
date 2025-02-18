@@ -7,8 +7,10 @@ import { Gif } from '../interfaces/gif.interface';
 import type { GiphyResponse } from '../interfaces/giphy.interfaces';
 import { GifMapper } from './mapper/gif.mapper';
 
+const GIF_KEY = 'gifsv1'
+
 const loadFromLocalStorage = () => {
-    const  gifsFromLocalStorage = localStorage.getItem('gifsi') ?? '{}';
+    const  gifsFromLocalStorage = localStorage.getItem(GIF_KEY) ?? '{}';
     const gifs = JSON.parse(gifsFromLocalStorage);
 
     return gifs;
@@ -32,8 +34,8 @@ export class GifService {
     }
 
     saveGifsToLocalStorage = effect( () => {
-        const historyString = JSON.stringify(this.searchHistory())
-        localStorage.setItem('gifsi', historyString);
+        const historyString = JSON.stringify(this.searchHistory());
+        localStorage.setItem(GIF_KEY, historyString);
     })
 
     loadTrendingGifs(){
@@ -47,7 +49,6 @@ export class GifService {
             const gifs = GifMapper.mapGiphyItemsToGifArray(response.data);
             this.trendingGifs.set(gifs);
             this.trendingGifsLoading.set(false);
-            console.log(response.data)
         } )
     }
 
