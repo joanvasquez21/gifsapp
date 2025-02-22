@@ -10,12 +10,26 @@ export default class TrendingPageComponent {
   
   gifService = inject(GifService);
 
-  scrollDivRef = viewChild<ElementRef>('groupDiv')
+  scrollDivRef = viewChild<ElementRef<HTMLDivElement>>('groupDiv')
 
   onScroll(event: Event){
     const scrollDiv = this.scrollDivRef()?.nativeElement;
-    console.log(scrollDiv)
+
+    if( !scrollDiv) return;
     
+    // La posición actual del scroll (cuánto se ha desplazado verticalmente)
+    const scrollTop = scrollDiv.scrollTop;
+
+    // El alto visible del contenedor (lo que se puede ver sin hacer scroll)
+    const clientHeight = scrollDiv.clientHeight;
+
+    // El alto total del contenido con scroll (incluyendo lo que está fuera de la vista)
+    const scrollHeight = scrollDiv.scrollHeight;
+    
+    // 300 pixeles antes de llegar al final del scroll
+    const isAtBottom = scrollTop + clientHeight + 300 >= scrollHeight;
+
+
   }
 
  }
