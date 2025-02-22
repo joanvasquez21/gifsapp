@@ -29,6 +29,10 @@ export default class TrendingPageComponent {
     // 300 pixeles antes de llegar al final del scroll
     const isAtBottom = scrollTop + clientHeight + 300 >= scrollHeight;
 
+    if( isAtBottom){
+      //cargamos la siguiente pagina
+      this.gifService.loadTrendingGifs()
+    }
 
   }
 

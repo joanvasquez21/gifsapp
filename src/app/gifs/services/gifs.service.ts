@@ -23,7 +23,8 @@ export class GifService {
     private http = inject(HttpClient);
 
     trendingGifs = signal<Gif[]>([]);
-    trendingGifsLoading = signal(true);
+    trendingGifsLoading = signal(false);
+    private trendingPage = signal(0);
 
     trendingGifGroup = computed<Gif[][]>( () => {
         //creamos la estructura de 3 elementos para el diseño masonry
@@ -49,15 +50,29 @@ export class GifService {
     })
 
     loadTrendingGifs(){
+
+        if(this.trendingGifsLoading()) return;
+
+        this.trendingGifsLoading.set(true);
+
+
         this.http.get<GiphyResponse>(`${environment.giphyUrl}/gifs/trending`, {
             params:{
                 api_key: environment.giphyApiKey,
-                limit: 20
+                limit: 20,
+                offset: this.trendingPage() * 20,
             }
         })
         .subscribe( (response) => {
             const gifs = GifMapper.mapGiphyItemsToGifArray(response.data);
-            this.trendingGifs.set(gifs);
+            this.trendingGifs.update( currentGifs => [
+                //mantenemos los gifs anteriores
+                ...currentGifs,
+                //y agregamos los nuevos gifs
+                ...gifs
+
+            ]);
+            this.trendingPage.update( (current) => current +1 )
             this.trendingGifsLoading.set(false);
         } )
     }
