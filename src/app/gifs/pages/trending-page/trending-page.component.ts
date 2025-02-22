@@ -1,4 +1,5 @@
-import { Component, ElementRef, inject, viewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, inject, viewChild } from '@angular/core';
+import { ScrollStateService } from 'src/app/shared/services/scroll-state.service';
 import { GifService } from '../../services/gifs.service';
 
 @Component({
@@ -6,15 +7,23 @@ import { GifService } from '../../services/gifs.service';
 //  imports: [GifListComponent],
   templateUrl: './trending-page.component.html',
 })
-export default class TrendingPageComponent {
+export default class TrendingPageComponent implements AfterViewInit{
   
   gifService = inject(GifService);
+  scrollStateService = inject(ScrollStateService)
 
-  scrollDivRef = viewChild<ElementRef<HTMLDivElement>>('groupDiv')
+  scrollDivRef = viewChild<ElementRef<HTMLDivElement>>('groupDiv');
+
+  ngAfterViewInit(): void {
+    const scrollDiv = this.scrollDivRef()?.nativeElement;
+    if( !scrollDiv) return;
+
+    scrollDiv.scrollTop = this.scrollStateService.trendingScrollState();
+
+  }
 
   onScroll(event: Event){
     const scrollDiv = this.scrollDivRef()?.nativeElement;
-
     if( !scrollDiv) return;
     
     // La posición actual del scroll (cuánto se ha desplazado verticalmente)
@@ -28,12 +37,12 @@ export default class TrendingPageComponent {
     
     // 300 pixeles antes de llegar al final del scroll
     const isAtBottom = scrollTop + clientHeight + 300 >= scrollHeight;
+    this.scrollStateService.trendingScrollState.set(scrollTop)
 
     if( isAtBottom){
       //cargamos la siguiente pagina
       this.gifService.loadTrendingGifs()
     }
-
   }
 
  }
