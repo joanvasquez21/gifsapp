@@ -31,3 +31,5 @@ GifsApp es una aplicación web construida con Angular que permite a los usuarios
 4. Ejecuta la aplicación en modo desarrollo:
 ```ng serve ```
 ### Adjunto imagenes:
+![image](https://github.com/user-attachments/assets/9d1ee4db-02b0-4e79-9603-94feda3dbc60)
+![image](https://github.com/user-attachments/assets/37dbeee6-8e28-4450-8112-907981000938)
