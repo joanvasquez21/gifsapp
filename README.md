@@ -21,7 +21,7 @@ GifsApp es una aplicación web construida con Angular que permite a los usuarios
 2. Instala las dependencias: 
 ``` npm install ```
 3. configura tu entorno:
-- crea  un archivo src/environments/environment.ts con tu API Key de Giphy:
+- crea  un archivo src/environments/environment.ts con tu API Key de Giphy
 ```export const environment = {
   production: false,
   giphyApiKey: 'TU_API_KEY',
