@@ -10,11 +10,11 @@ GifsApp es una aplicación web construida con Angular que permite a los usuarios
 -  Diseño masonry responsive adaptable a diferentes dispositivos.
 
 ###  Tecnologías utilizadas
-- Angular 17+ con Signals
-- RxJS para manejo de streams de datos
-- TypeScript para tipado seguro
-- Giphy API para la obtención de GIFs
-- Tailwind CSS (opcional) para estilos modernos
+- Angular 17+ con Signals.
+- RxJS para manejo de streams de datos.
+- TypeScript para tipado seguro.
+- Giphy API para la obtención de GIFs.
+- Tailwind CSS (opcional) para estilos modernos.
 ###  Instalación y configuración
 1. Clona el repositorio: 
 ``` git clone https://github.com/joanvasquez21/gifsapp ```
